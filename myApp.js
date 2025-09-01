@@ -7,7 +7,9 @@ let app = express();
 app.get("/", (req, res)=>{
     res.sendFile(__dirname + "/views/index.html")
 })
-
+app.get("/json", (req, res) => {
+    res.json({"message": "hello json"});
+})
 app.use("/public/style.css", express.static(__dirname + "/public/style.css"));
 console.log("Hello World");
 
