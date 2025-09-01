@@ -7,6 +7,8 @@ let app = express();
 app.get("/", (req, res)=>{
     res.sendFile(__dirname + "/views/index.html")
 })
+
+app.use("/public", express.static(__dirname + "/public/style.css"));
 console.log("Hello World");
 
 
