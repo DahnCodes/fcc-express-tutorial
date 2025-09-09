@@ -11,9 +11,9 @@ require('dotenv').config();
     })
     
     app.use("/public/style.css", express.static(__dirname + "/public/style.css"));
-    
+
 app.get("/", (req, res)=>{
-    res.sendFile(__dirname + "/views/index.html")
+    res.sendFile(__dirname + "/views/index.html");
 })
 app.get("/json", (req, res) => {
   
@@ -22,6 +22,23 @@ app.get("/json", (req, res) => {
         message = message.toUpperCase();
     }
         res.json({"message": message});
+});
+
+function addTimeMiddleWare(req, res, next){
+req.time = new Date().toString();
+next();
+}
+
+function timeHandler(req, res) {
+    res.json({time : req.time})
+}
+app.get("/now", addTimeMiddleWare, timeHandler);
+
+app.get("/now", function(req, res, next){
+    req.time = new Date().toString();
+    next();
+}, function(req, res){
+    res.json({time : req.time})
 })
 console.log("Hello World");
 
