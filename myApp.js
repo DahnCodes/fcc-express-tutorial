@@ -15,6 +15,7 @@ require('dotenv').config();
 app.get("/", (req, res)=>{
     res.sendFile(__dirname + "/views/index.html");
 })
+
 app.get("/json", (req, res) => {
   
     let message = "Hello json";
@@ -39,6 +40,11 @@ app.get("/now", function(req, res, next){
     next();
 }, function(req, res){
     res.json({time : req.time})
+})
+
+app.get("/:word/echo", (req, res) =>{
+    const word = req.params.word;
+    res.json({echo: word})
 })
 console.log("Hello World");
 
