@@ -46,6 +46,24 @@ app.get("/:word/echo", (req, res) =>{
     const word = req.params.word;
     res.json({echo: word})
 })
+
+// app.get("/name", (req, res)=>{
+//     const first = req.query.first;
+//     const last = req.query.last;
+//     res.json({name: `${first} ${last}`});
+// })
+app.route("/name")
+ .get((req, res)=>{
+    const first = req.query.first;
+    const last = req.query.last;
+    res.json({name: `${first} ${last}`})
+})
+.post((req, res)=>{
+    const first = req.body.first;
+    const last = req.body.last;
+    res.json({name: `${first} ${last}`})
+});
+
 console.log("Hello World");
 
 // let method = "GET"
