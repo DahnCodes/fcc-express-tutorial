@@ -1,6 +1,7 @@
 let express = require('express');
 let app = express();
 require('dotenv').config();
+let bodyParser = require('body-parser');
 // app.get("/", function(req, res){
     // res.send('Hello Express');
     // })
@@ -11,6 +12,9 @@ require('dotenv').config();
     })
     
     app.use("/public/style.css", express.static(__dirname + "/public/style.css"));
+    
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
 
 app.get("/", (req, res)=>{
     res.sendFile(__dirname + "/views/index.html");
@@ -52,6 +56,7 @@ app.get("/:word/echo", (req, res) =>{
 //     const last = req.query.last;
 //     res.json({name: `${first} ${last}`});
 // })
+
 app.route("/name")
  .get((req, res)=>{
     const first = req.query.first;
@@ -63,6 +68,7 @@ app.route("/name")
     const last = req.body.last;
     res.json({name: `${first} ${last}`})
 });
+
 
 console.log("Hello World");
 
